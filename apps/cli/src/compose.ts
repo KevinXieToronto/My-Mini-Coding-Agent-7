@@ -4,6 +4,7 @@ import { SessionStore, type Message } from '@mini-dsh/core'
 import { LocalFileSystem, toolFs } from '@mini-dsh/fs'
 import { LlmAdapter, LlmRuntime, type GenerateOptions, type StreamChunk } from '@mini-dsh/llm'
 import * as llmDeepSeek from '@mini-dsh/llm-deepseek'
+import { SqliteSessionPersistence } from '@mini-dsh/persistence-sqlite'
 import { LocalShellExecutor, toolShell } from '@mini-dsh/shell'
 import { persona, SystemPrompt, wireTools } from '@mini-dsh/system-prompt'
 import { ToolRuntime } from '@mini-dsh/tools'
@@ -31,6 +32,8 @@ export class MockEchoAdapter extends LlmAdapter {
 export interface ComposeOptions {
   providerKind: 'deepseek' | 'mock'
   personaText?: string
+  /** When set, sessions persist to this SQLite file. */
+  dbPath?: string
 }
 
 /**
@@ -52,6 +55,9 @@ export function composeHarness(root: Context, options: ComposeOptions): void {
   })
   root.plugin(wireTools)
   root.plugin(AgentRegistry)
+  if (options.dbPath !== undefined) {
+    root.plugin(SqliteSessionPersistence, { path: options.dbPath })
+  }
   if (options.providerKind === 'mock') {
     root.plugin({
       name: 'llm-mock-echo',

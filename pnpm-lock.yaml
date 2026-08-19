@@ -66,6 +66,9 @@ importers:
       '@mini-dsh/llm-deepseek':
         specifier: workspace:*
         version: link:../../packages/llm-deepseek
+      '@mini-dsh/persistence-sqlite':
+        specifier: workspace:*
+        version: link:../../packages/persistence-sqlite
       '@mini-dsh/shell':
         specifier: workspace:*
         version: link:../../packages/shell
@@ -134,6 +137,15 @@ importers:
       '@mini-dsh/llm':
         specifier: workspace:*
         version: link:../llm
+
+  packages/persistence-sqlite:
+    dependencies:
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../cordis
+      '@mini-dsh/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/shell:
     dependencies:
