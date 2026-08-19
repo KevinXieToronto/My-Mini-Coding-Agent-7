@@ -1,15 +1,8 @@
 {
-  "name": "mini-dsh",
+  "name": "@mini-dsh/cli",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.7.0",
-  "engines": {
-    "node": ">=22.12"
-  },
-  "scripts": {
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "dsh": "tsx apps/cli/src/main.ts"
-  },
   "dependencies": {
     "@mini-dsh/agent": "workspace:*",
     "@mini-dsh/cordis": "workspace:*",
@@ -20,10 +13,5 @@
     "@mini-dsh/shell": "workspace:*",
     "@mini-dsh/system-prompt": "workspace:*",
     "@mini-dsh/tools": "workspace:*"
-  },
-  "devDependencies": {
-    "@types/node": "^22.10.2",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
   }
 }

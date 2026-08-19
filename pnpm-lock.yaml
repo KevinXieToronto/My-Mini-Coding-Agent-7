@@ -46,6 +46,36 @@ importers:
         specifier: ^5.7.2
         version: 5.9.3
 
+  apps/cli:
+    dependencies:
+      '@mini-dsh/agent':
+        specifier: workspace:*
+        version: link:../../packages/agent
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../../packages/cordis
+      '@mini-dsh/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@mini-dsh/fs':
+        specifier: workspace:*
+        version: link:../../packages/fs
+      '@mini-dsh/llm':
+        specifier: workspace:*
+        version: link:../../packages/llm
+      '@mini-dsh/llm-deepseek':
+        specifier: workspace:*
+        version: link:../../packages/llm-deepseek
+      '@mini-dsh/shell':
+        specifier: workspace:*
+        version: link:../../packages/shell
+      '@mini-dsh/system-prompt':
+        specifier: workspace:*
+        version: link:../../packages/system-prompt
+      '@mini-dsh/tools':
+        specifier: workspace:*
+        version: link:../../packages/tools
+
   packages/agent:
     dependencies:
       '@mini-dsh/cordis':
