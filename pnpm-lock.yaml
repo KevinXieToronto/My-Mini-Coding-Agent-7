@@ -14,12 +14,21 @@ importers:
       '@mini-dsh/core':
         specifier: workspace:*
         version: link:packages/core
+      '@mini-dsh/fs':
+        specifier: workspace:*
+        version: link:packages/fs
       '@mini-dsh/llm':
         specifier: workspace:*
         version: link:packages/llm
       '@mini-dsh/llm-deepseek':
         specifier: workspace:*
         version: link:packages/llm-deepseek
+      '@mini-dsh/shell':
+        specifier: workspace:*
+        version: link:packages/shell
+      '@mini-dsh/tools':
+        specifier: workspace:*
+        version: link:packages/tools
     devDependencies:
       '@types/node':
         specifier: ^22.10.2
@@ -39,6 +48,18 @@ importers:
         specifier: workspace:*
         version: link:../cordis
 
+  packages/fs:
+    dependencies:
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../cordis
+      '@mini-dsh/core':
+        specifier: workspace:*
+        version: link:../core
+      '@mini-dsh/tools':
+        specifier: workspace:*
+        version: link:../tools
+
   packages/llm:
     dependencies:
       '@mini-dsh/cordis':
@@ -49,6 +70,30 @@ importers:
         version: link:../core
 
   packages/llm-deepseek:
+    dependencies:
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../cordis
+      '@mini-dsh/core':
+        specifier: workspace:*
+        version: link:../core
+      '@mini-dsh/llm':
+        specifier: workspace:*
+        version: link:../llm
+
+  packages/shell:
+    dependencies:
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../cordis
+      '@mini-dsh/core':
+        specifier: workspace:*
+        version: link:../core
+      '@mini-dsh/tools':
+        specifier: workspace:*
+        version: link:../tools
+
+  packages/tools:
     dependencies:
       '@mini-dsh/cordis':
         specifier: workspace:*

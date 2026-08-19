@@ -26,3 +26,6 @@ replay_pid*
 # Node
 node_modules/
 .idea/
+
+# Demo scratch output
+tmp-ch05/

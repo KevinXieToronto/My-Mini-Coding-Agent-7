@@ -1,0 +1,14 @@
+{
+  "name": "@mini-dsh/tools",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@mini-dsh/cordis": "workspace:*",
+    "@mini-dsh/core": "workspace:*",
+    "@mini-dsh/llm": "workspace:*"
+  }
+}
