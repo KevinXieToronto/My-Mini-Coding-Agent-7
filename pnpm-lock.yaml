@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@mini-dsh/agent':
+        specifier: workspace:*
+        version: link:packages/agent
       '@mini-dsh/cordis':
         specifier: workspace:*
         version: link:packages/cordis
@@ -26,6 +29,9 @@ importers:
       '@mini-dsh/shell':
         specifier: workspace:*
         version: link:packages/shell
+      '@mini-dsh/system-prompt':
+        specifier: workspace:*
+        version: link:packages/system-prompt
       '@mini-dsh/tools':
         specifier: workspace:*
         version: link:packages/tools
@@ -39,6 +45,24 @@ importers:
       typescript:
         specifier: ^5.7.2
         version: 5.9.3
+
+  packages/agent:
+    dependencies:
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../cordis
+      '@mini-dsh/core':
+        specifier: workspace:*
+        version: link:../core
+      '@mini-dsh/llm':
+        specifier: workspace:*
+        version: link:../llm
+      '@mini-dsh/system-prompt':
+        specifier: workspace:*
+        version: link:../system-prompt
+      '@mini-dsh/tools':
+        specifier: workspace:*
+        version: link:../tools
 
   packages/cordis: {}
 
@@ -89,6 +113,18 @@ importers:
       '@mini-dsh/core':
         specifier: workspace:*
         version: link:../core
+      '@mini-dsh/tools':
+        specifier: workspace:*
+        version: link:../tools
+
+  packages/system-prompt:
+    dependencies:
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../cordis
+      '@mini-dsh/llm':
+        specifier: workspace:*
+        version: link:../llm
       '@mini-dsh/tools':
         specifier: workspace:*
         version: link:../tools
