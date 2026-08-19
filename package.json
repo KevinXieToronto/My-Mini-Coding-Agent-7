@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@mini-dsh/cordis": "workspace:*",
-    "@mini-dsh/core": "workspace:*"
+    "@mini-dsh/core": "workspace:*",
+    "@mini-dsh/llm": "workspace:*",
+    "@mini-dsh/llm-deepseek": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
