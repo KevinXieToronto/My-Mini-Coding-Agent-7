@@ -14,6 +14,7 @@
     "@mini-dsh/persistence-sqlite": "workspace:*",
     "@mini-dsh/shell": "workspace:*",
     "@mini-dsh/system-prompt": "workspace:*",
-    "@mini-dsh/tools": "workspace:*"
+    "@mini-dsh/tools": "workspace:*",
+    "@mini-dsh/web-ui": "workspace:*"
   }
 }

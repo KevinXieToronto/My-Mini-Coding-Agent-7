@@ -81,6 +81,9 @@ importers:
       '@mini-dsh/tools':
         specifier: workspace:*
         version: link:../../packages/tools
+      '@mini-dsh/web-ui':
+        specifier: workspace:*
+        version: link:../../packages/web-ui
 
   packages/agent:
     dependencies:
@@ -197,6 +200,18 @@ importers:
       '@mini-dsh/llm':
         specifier: workspace:*
         version: link:../llm
+
+  packages/web-ui:
+    dependencies:
+      '@mini-dsh/agent':
+        specifier: workspace:*
+        version: link:../agent
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../cordis
+      '@mini-dsh/core':
+        specifier: workspace:*
+        version: link:../core
 
 packages:
 
