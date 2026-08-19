@@ -11,6 +11,9 @@ importers:
       '@mini-dsh/cordis':
         specifier: workspace:*
         version: link:packages/cordis
+      '@mini-dsh/core':
+        specifier: workspace:*
+        version: link:packages/core
     devDependencies:
       '@types/node':
         specifier: ^22.10.2
@@ -23,6 +26,12 @@ importers:
         version: 5.9.3
 
   packages/cordis: {}
+
+  packages/core:
+    dependencies:
+      '@mini-dsh/cordis':
+        specifier: workspace:*
+        version: link:../cordis
 
 packages:
 

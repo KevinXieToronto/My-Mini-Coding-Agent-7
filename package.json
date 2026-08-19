@@ -10,7 +10,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@mini-dsh/cordis": "workspace:*"
+    "@mini-dsh/cordis": "workspace:*",
+    "@mini-dsh/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
