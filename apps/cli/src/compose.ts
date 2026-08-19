@@ -1,5 +1,6 @@
 import type { Context } from '@mini-dsh/cordis'
 import { AgentRegistry } from '@mini-dsh/agent'
+import { ApprovalService, consoleApprover, requireApproval, type ApprovalPolicy } from '@mini-dsh/approval'
 import { SessionStore, type Message } from '@mini-dsh/core'
 import { LocalFileSystem, toolFs } from '@mini-dsh/fs'
 import { LlmAdapter, LlmRuntime, type GenerateOptions, type StreamChunk } from '@mini-dsh/llm'
@@ -34,6 +35,8 @@ export interface ComposeOptions {
   personaText?: string
   /** When set, sessions persist to this SQLite file. */
   dbPath?: string
+  /** Approval gate: which tools ask, and the policy ('ask' dispatches, 'never' rejects). */
+  approval?: { policy: ApprovalPolicy; askTools: string[] }
 }
 
 /**
@@ -57,6 +60,13 @@ export function composeHarness(root: Context, options: ComposeOptions): void {
   root.plugin(AgentRegistry)
   if (options.dbPath !== undefined) {
     root.plugin(SqliteSessionPersistence, { path: options.dbPath })
+  }
+  if (options.approval !== undefined) {
+    root.plugin(ApprovalService, { policy: options.approval.policy })
+    if (options.approval.askTools.length > 0) {
+      root.plugin(requireApproval, { tools: options.approval.askTools })
+    }
+    root.plugin(consoleApprover)
   }
   if (options.providerKind === 'mock') {
     root.plugin({

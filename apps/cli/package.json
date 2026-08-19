@@ -5,6 +5,7 @@
   "type": "module",
   "dependencies": {
     "@mini-dsh/agent": "workspace:*",
+    "@mini-dsh/approval": "workspace:*",
     "@mini-dsh/cordis": "workspace:*",
     "@mini-dsh/core": "workspace:*",
     "@mini-dsh/fs": "workspace:*",

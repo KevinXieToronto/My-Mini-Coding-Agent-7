@@ -11,6 +11,7 @@ interface CliInvocation {
   dbPath: string
   list: boolean
   resume: string | undefined
+  askTools: string[]
 }
 
 function parseArgs(argv: string[]): CliInvocation {
@@ -20,6 +21,7 @@ function parseArgs(argv: string[]): CliInvocation {
   let model: string | undefined
   let resume: string | undefined
   let dbPath = '.mini-dsh/sessions.db'
+  let askTools: string[] = []
   const positionals: string[] = []
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i]!
@@ -29,11 +31,12 @@ function parseArgs(argv: string[]): CliInvocation {
     else if (arg === '--db') dbPath = argv[++i] ?? dbPath
     else if (arg === '--provider') provider = argv[++i]
     else if (arg === '--model') model = argv[++i]
+    else if (arg === '--ask-tools') askTools = (argv[++i] ?? '').split(',').filter((name) => name !== '')
     else positionals.push(arg)
   }
   const task = positionals.join(' ').trim()
   if (!list && task === '') {
-    console.error('usage: pnpm dsh [--mock] [--list] [--resume <session-id>] [--db <path>] [--provider <name>] [--model <name>] "<task>"')
+    console.error('usage: pnpm dsh [--mock] [--list] [--resume <session-id>] [--db <path>] [--ask-tools <a,b>] [--provider <name>] [--model <name>] "<task>"')
     process.exit(2)
   }
   const providerKind = mock ? 'mock' : 'deepseek'
@@ -45,13 +48,18 @@ function parseArgs(argv: string[]): CliInvocation {
     dbPath,
     list,
     resume,
+    askTools,
   }
 }
 
 const invocation = parseArgs(process.argv.slice(2))
 
 const root = new Context()
-composeHarness(root, { providerKind: invocation.providerKind, dbPath: invocation.dbPath })
+composeHarness(root, {
+  providerKind: invocation.providerKind,
+  dbPath: invocation.dbPath,
+  approval: { policy: 'ask', askTools: invocation.askTools },
+})
 
 if (invocation.list) {
   const listings = root.sessionPersistence.list()
@@ -68,6 +76,7 @@ if (invocation.list) {
 root.on('session/event', (_session, event) => {
   if (event.type === 'tool/call') console.error(`  [tool] ${event.data.name} ${event.data.arguments}`)
   if (event.type === 'tool/result') console.error(`  [tool] -> ${event.data.error === undefined ? 'ok' : `error (${event.data.error.name})`}`)
+  if (event.type === 'approval/decided') console.error(`  [approval] ${event.data.id} -> ${event.data.outcome}`)
 })
 root.on('agent/error', (_agent, error) => {
   console.error('  [agent error]', error instanceof Error ? error.message : error)
