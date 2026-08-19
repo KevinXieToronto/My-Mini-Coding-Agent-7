@@ -29,3 +29,4 @@ node_modules/
 
 # Demo scratch output
 tmp-ch05/
+tmp-*/
